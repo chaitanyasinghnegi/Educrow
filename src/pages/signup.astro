@@ -1,7 +1,5 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
-import { createClient } from '@supabase/supabase-js';
-
 ---
 
 <MainLayout title="Sign Up">
@@ -39,12 +37,77 @@ import { createClient } from '@supabase/supabase-js';
         </div>
 
         <div>
-          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            Sign up
+          <button type="submit" id="signup-btn" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
+            <span id="signup-btn-text">Sign up</span>
+            <span id="signup-spinner" class="hidden ml-2">
+              <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+              </svg>
+            </span>
           </button>
         </div>
         <div id="error-message" class="text-red-500 text-center hidden"></div>
       </form>
+    </div>
+  </div>
+
+  <!-- OTP Verification Modal -->
+  <div id="otp-modal" class="fixed inset-0 z-50 hidden">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
+    <!-- Modal Content -->
+    <div class="flex items-center justify-center min-h-screen px-4">
+      <div class="relative bg-white rounded-xl shadow-2xl p-8 max-w-md w-full space-y-6 z-10">
+        <!-- Header -->
+        <div class="text-center">
+          <div class="mx-auto flex items-center justify-center h-14 w-14 rounded-full bg-indigo-100 mb-4">
+            <svg class="h-7 w-7 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900">Verify your email</h3>
+          <p class="mt-2 text-sm text-gray-600">
+            We've sent an 8-digit verification code to
+          </p>
+          <p id="otp-email-display" class="text-sm font-semibold text-indigo-600 mt-1"></p>
+        </div>
+
+        <!-- OTP Input -->
+        <div class="flex justify-center gap-2" id="otp-inputs">
+          <input type="text" maxlength="1" class="otp-input w-10 h-12 text-center text-lg font-bold border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none transition-all duration-200" data-index="0" inputmode="numeric" autocomplete="one-time-code">
+          <input type="text" maxlength="1" class="otp-input w-10 h-12 text-center text-lg font-bold border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none transition-all duration-200" data-index="1" inputmode="numeric">
+          <input type="text" maxlength="1" class="otp-input w-10 h-12 text-center text-lg font-bold border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none transition-all duration-200" data-index="2" inputmode="numeric">
+          <input type="text" maxlength="1" class="otp-input w-10 h-12 text-center text-lg font-bold border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none transition-all duration-200" data-index="3" inputmode="numeric">
+          <input type="text" maxlength="1" class="otp-input w-10 h-12 text-center text-lg font-bold border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none transition-all duration-200" data-index="4" inputmode="numeric">
+          <input type="text" maxlength="1" class="otp-input w-10 h-12 text-center text-lg font-bold border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none transition-all duration-200" data-index="5" inputmode="numeric">
+          <input type="text" maxlength="1" class="otp-input w-10 h-12 text-center text-lg font-bold border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none transition-all duration-200" data-index="6" inputmode="numeric">
+          <input type="text" maxlength="1" class="otp-input w-10 h-12 text-center text-lg font-bold border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 focus:outline-none transition-all duration-200" data-index="7" inputmode="numeric">
+        </div>
+
+        <!-- Verify Button -->
+        <button id="verify-otp-btn" class="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+          <span id="verify-btn-text">Verify & Continue</span>
+          <span id="verify-spinner" class="hidden ml-2">
+            <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+            </svg>
+          </span>
+        </button>
+
+        <!-- OTP Error -->
+        <div id="otp-error" class="text-red-500 text-center text-sm hidden"></div>
+
+        <!-- Resend -->
+        <div class="text-center text-sm text-gray-500">
+          Didn't receive the code?
+          <button id="resend-btn" class="font-medium text-indigo-600 hover:text-indigo-500 ml-1 disabled:opacity-50 disabled:cursor-not-allowed">
+            Resend Code
+          </button>
+          <span id="resend-timer" class="text-gray-400 hidden ml-1"></span>
+        </div>
+      </div>
     </div>
   </div>
 </MainLayout>
@@ -53,15 +116,40 @@ import { createClient } from '@supabase/supabase-js';
   import { createClient } from '@supabase/supabase-js';
 
   const supabase = createClient(
-    'https://mmvfltzxrzknsylvtzbb.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1tdmZsdHp4cnprbnN5bHZ0emJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDExNjM5OTAsImV4cCI6MjA1NjczOTk5MH0.5jHvHFxw_mNMb01CPWJqHHQ37IVbQogIsUMIDvrEKNA'
+    'https://icmcvvpwysiswhnatifi.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImljbWN2dnB3eXNpc3dobmF0aWZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4NDQyNDEsImV4cCI6MjA4NzQyMDI0MX0.4yUbzoSGPP0PAgSUaXehVcaDEnJ8Ev-pl1j1L5HmMD8'
   );
 
-  const form = document.getElementById('signup-form');
-  const errorMessage = document.getElementById('error-message');
+  // DOM elements
+  const form = document.getElementById('signup-form') as HTMLFormElement;
+  const errorMessage = document.getElementById('error-message')!;
+  const signupBtn = document.getElementById('signup-btn') as HTMLButtonElement;
+  const signupBtnText = document.getElementById('signup-btn-text')!;
+  const signupSpinner = document.getElementById('signup-spinner')!;
 
+  const otpModal = document.getElementById('otp-modal')!;
+  const otpEmailDisplay = document.getElementById('otp-email-display')!;
+  const otpInputs = document.querySelectorAll('.otp-input') as NodeListOf<HTMLInputElement>;
+  const verifyBtn = document.getElementById('verify-otp-btn') as HTMLButtonElement;
+  const verifyBtnText = document.getElementById('verify-btn-text')!;
+  const verifySpinner = document.getElementById('verify-spinner')!;
+  const otpError = document.getElementById('otp-error')!;
+  const resendBtn = document.getElementById('resend-btn') as HTMLButtonElement;
+  const resendTimer = document.getElementById('resend-timer')!;
+
+  let pendingEmail = '';
+  let pendingPassword = '';
+
+  // ── Sign Up Form ──────────────────────────────────────
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // Reset UI
+    errorMessage.classList.add('hidden');
+    signupBtn.disabled = true;
+    signupBtnText.textContent = 'Creating account...';
+    signupSpinner.classList.remove('hidden');
+
     const formData = new FormData(e.target as HTMLFormElement);
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
@@ -70,42 +158,163 @@ import { createClient } from '@supabase/supabase-js';
     const phone_number = formData.get('phone_number') as string;
 
     try {
-      const { data: { user }, error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          data: {
-            first_name,
-            last_name,
-            phone_number
-          }
+          data: { first_name, last_name, phone_number }
         }
       });
-// printf("Coding Hub");
+
       if (error) throw error;
 
-      if (user) {
-        // Create a new record in the public.users table
-        // Create a new record in the public.users table
-        const { error: insertError } = await supabase
-          .from('users')
-          .insert([
-            {
-              uuid: user.id,  // Change this from 'id' to 'uuid'
-              email: email,
-              first_name: first_name,
-              last_name: last_name,
-              phone_number: phone_number
-            }
-          ]);
+      if (data.user) {
+        // Store for OTP verification
+        pendingEmail = email;
+        pendingPassword = password;
 
-        if (insertError) throw insertError;
-        
+        // Show OTP modal
+        otpEmailDisplay.textContent = email;
+        otpModal.classList.remove('hidden');
+        otpInputs[0].focus();
+        startResendTimer();
+      }
+    } catch (error: any) {
+      errorMessage.classList.remove('hidden');
+      errorMessage.textContent = error.message;
+    } finally {
+      signupBtn.disabled = false;
+      signupBtnText.textContent = 'Sign up';
+      signupSpinner.classList.add('hidden');
+    }
+  });
+
+  // ── OTP Input Handling ────────────────────────────────
+  otpInputs.forEach((input, index) => {
+    input.addEventListener('input', (e) => {
+      const target = e.target as HTMLInputElement;
+      const value = target.value;
+
+      // Only allow digits
+      target.value = value.replace(/[^0-9]/g, '');
+
+      if (target.value && index < otpInputs.length - 1) {
+        otpInputs[index + 1].focus();
+      }
+
+      checkOtpComplete();
+    });
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && !input.value && index > 0) {
+        otpInputs[index - 1].focus();
+      }
+    });
+
+    // Support paste
+    input.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const pastedData = e.clipboardData?.getData('text').replace(/[^0-9]/g, '') || '';
+      for (let i = 0; i < Math.min(pastedData.length, otpInputs.length - index); i++) {
+        otpInputs[index + i].value = pastedData[i];
+      }
+      const nextIndex = Math.min(index + pastedData.length, otpInputs.length - 1);
+      otpInputs[nextIndex].focus();
+      checkOtpComplete();
+    });
+  });
+
+  function checkOtpComplete() {
+    const code = getOtpCode();
+    verifyBtn.disabled = code.length !== 8;
+  }
+
+  function getOtpCode(): string {
+    return Array.from(otpInputs).map(input => input.value).join('');
+  }
+
+  // ── Verify OTP ────────────────────────────────────────
+  verifyBtn.addEventListener('click', async () => {
+    const token = getOtpCode();
+    if (token.length !== 8) return;
+
+    // Reset UI
+    otpError.classList.add('hidden');
+    verifyBtn.disabled = true;
+    verifyBtnText.textContent = 'Verifying...';
+    verifySpinner.classList.remove('hidden');
+
+    try {
+      const { data, error } = await supabase.auth.verifyOtp({
+        email: pendingEmail,
+        token,
+        type: 'signup'
+      });
+
+      if (error) throw error;
+
+      if (data.session) {
+        // Store session
+        sessionStorage.setItem('userData', JSON.stringify({
+          id: data.user?.id,
+          email: data.user?.email,
+          first_name: data.user?.user_metadata?.first_name || '',
+          last_name: data.user?.user_metadata?.last_name || '',
+          phone_number: data.user?.user_metadata?.phone_number || ''
+        }));
+        sessionStorage.setItem('userSession', JSON.stringify(data.session));
+
+        // Redirect to dashboard
         window.location.href = '/index_org';
       }
     } catch (error: any) {
-      errorMessage?.classList.remove('hidden');
-      errorMessage!.textContent = error.message;
+      otpError.classList.remove('hidden');
+      otpError.textContent = error.message || 'Invalid verification code. Please try again.';
+
+      // Clear inputs on error
+      otpInputs.forEach(input => input.value = '');
+      otpInputs[0].focus();
+    } finally {
+      verifyBtn.disabled = false;
+      verifyBtnText.textContent = 'Verify & Continue';
+      verifySpinner.classList.add('hidden');
+    }
+  });
+
+  // ── Resend OTP ────────────────────────────────────────
+  let resendCountdown: ReturnType<typeof setInterval>;
+
+  function startResendTimer() {
+    resendBtn.disabled = true;
+    resendBtn.classList.add('hidden');
+    resendTimer.classList.remove('hidden');
+    let seconds = 60;
+    resendTimer.textContent = `(${seconds}s)`;
+    
+    resendCountdown = setInterval(() => {
+      seconds--;
+      resendTimer.textContent = `(${seconds}s)`;
+      if (seconds <= 0) {
+        clearInterval(resendCountdown);
+        resendBtn.disabled = false;
+        resendBtn.classList.remove('hidden');
+        resendTimer.classList.add('hidden');
+      }
+    }, 1000);
+  }
+
+  resendBtn.addEventListener('click', async () => {
+    try {
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email: pendingEmail
+      });
+      if (error) throw error;
+      startResendTimer();
+      otpError.classList.add('hidden');
+    } catch (error: any) {
+      otpError.classList.remove('hidden');
+      otpError.textContent = error.message || 'Failed to resend code.';
     }
   });
 </script>
