@@ -1,0 +1,61 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import VideoCard from '../../components/VideoCard.astro';
+import DifficultyFilter from '../../components/DifficultyFilter.astro';
+import { videoTutorials } from '../../data/video-tutorials';
+import { programmingLanguages } from '../../data/programming-languages';
+
+export function getStaticPaths() {
+  return programmingLanguages.map(language => ({
+    params: { languageId: language.id },
+    props: { language }
+  }));
+}
+
+const { language } = Astro.props;
+const videos = videoTutorials.filter(video => video.languageId === language.id);
+---
+
+<MainLayout title={`${language.name} Tutorials`}>
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="flex items-center gap-4 mb-8">
+      <a href="/videos" class="text-indigo-600 hover:text-indigo-800 flex items-center gap-2">
+        <span class="text-xl">←</span>
+        <span>Back to Languages</span>
+      </a>
+      <h1 class="text-3xl font-bold flex items-center gap-3">
+        <span class="text-4xl">{language.icon}</span>
+        {language.name} Tutorials
+      </h1>
+    </div>
+
+    <DifficultyFilter selectedDifficulty="All" />
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {videos.map((video, index) => (
+        <a href={video.youtubeUrl} target="_blank" rel="noopener noreferrer">
+          <VideoCard video={video} index={index} />
+        </a>
+      ))}
+    </div>
+  </div>
+</MainLayout>
+
+<style>
+  .video-card {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+    animation-delay: var(--delay);
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

@@ -1,0 +1,123 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { programmingLanguages } from '../../data/programming-languages';
+import { cheatsheets } from '../../data/cheatsheets';
+import * as marked from 'marked';
+
+export function getStaticPaths() {
+  return programmingLanguages.map(language => ({
+    params: { languageId: language.id },
+    props: { language }
+  }));
+}
+
+const { language } = Astro.props;
+const languageCheatsheets = cheatsheets.filter(sheet => sheet.languageId === language.id);
+---
+
+<MainLayout title={`${language.name} Cheatsheets`}>
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="flex items-center gap-4 mb-8">
+      <a href="/cheatsheets" class="text-indigo-600 hover:text-indigo-800 flex items-center gap-2">
+        <span class="text-xl">←</span>
+        <span>Back to Languages</span>
+      </a>
+      <h1 class="text-3xl font-bold flex items-center gap-3">
+        <span class="text-4xl">{language.icon}</span>
+        {language.name} Cheatsheets
+      </h1>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {languageCheatsheets.map(sheet => (
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+          <h3 class="text-xl font-semibold mb-3">{sheet.title}</h3>
+          <p class="text-gray-600 mb-4">{sheet.description}</p>
+          <button 
+            class="text-indigo-600 hover:text-indigo-800 font-medium"
+            data-sheet-id={sheet.id}
+            data-sheet-content={sheet.content}
+          >
+            View Cheatsheet →
+          </button>
+        </div>
+      ))}
+    </div>
+  </div>
+</MainLayout>
+
+<script>
+  import { marked } from 'marked';
+
+  function showCheatsheet(content: string) {
+    const modal = document.createElement('div');
+    modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4';
+    
+    const markdown = marked.parse(content);
+    
+    modal.innerHTML = `
+      <div class="bg-white rounded-lg p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="prose max-w-none">
+          ${markdown}
+        </div>
+        <button class="mt-6 w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700">
+          Close
+        </button>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+    
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal || (e.target as HTMLElement).tagName === 'BUTTON') {
+        modal.remove();
+      }
+    });
+  }
+
+  document.querySelectorAll('[data-sheet-id]').forEach(button => {
+    button.addEventListener('click', () => {
+      const content = (button as HTMLElement).dataset.sheetContent || '';
+      showCheatsheet(content);
+    });
+  });
+</script>
+
+<style is:global>
+  .prose {
+    max-width: 65ch;
+    color: #374151;
+  }
+  .prose h1 {
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+  .prose h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .prose p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  .prose code {
+    background-color: #f3f4f6;
+    padding: 0.2em 0.4em;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+  }
+  .prose pre {
+    background-color: #f3f4f6;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+  }
+  .prose pre code {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+  }
+</style>

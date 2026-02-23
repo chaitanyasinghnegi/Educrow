@@ -1,0 +1,23 @@
+---
+const links = [
+  { href: '/index_org', text: 'Home' },
+  { href: '/problems', text: 'Problems' },
+  { href: '/chatbot', text: 'AI Help' },
+  { href: '/videos', text: 'Videos' },
+  { href: '/cheatsheets', text: 'Cheat Sheets' },
+];
+---
+
+<nav class="bg-white shadow-lg">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center h-16">
+      <a href="/index_org" class="text-xl font-bold text-indigo-600">CodeLearning</a>
+      <div class="hidden md:flex space-x-8">
+        {links.map(link => (
+          <a href={link.href} class="text-gray-700 hover:text-indigo-600">{link.text}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+</nav>
+

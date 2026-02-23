@@ -1,0 +1,31 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import AnimatedButton from '../components/AnimatedButton.astro';
+import { programmingLanguages } from '../data/programming-languages';
+---
+
+<MainLayout title="Programming Cheatsheets">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold mb-4">Choose Your Language</h1>
+      <p class="text-gray-600">Select a programming language to view its cheatsheets</p>
+    </div>
+    
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2 max-w-4xl mx-auto">
+      {programmingLanguages.map((language) => (
+        <AnimatedButton
+          href={`/cheatsheets/${language.id}`}
+          icon={language.icon}
+          name={language.name}
+        />
+      ))}
+    </div>
+  </div>
+</MainLayout>
+
+<style>
+  .grid > :nth-child(1) { --delay: 100ms; }
+  .grid > :nth-child(2) { --delay: 200ms; }
+  .grid > :nth-child(3) { --delay: 300ms; }
+  .grid > :nth-child(4) { --delay: 400ms; }
+</style>

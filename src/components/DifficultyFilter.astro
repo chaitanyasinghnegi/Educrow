@@ -1,0 +1,51 @@
+---
+interface Props {
+  selectedDifficulty: string;
+}
+
+const { selectedDifficulty } = Astro.props;
+const difficulties = ['All', 'Beginner', 'Intermediate', 'Advanced'];
+---
+
+<div class="flex gap-3 mb-6">
+  {difficulties.map(difficulty => (
+    <button
+      class={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
+        selectedDifficulty === difficulty
+          ? 'bg-indigo-600 text-white'
+          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+      }`}
+      data-difficulty={difficulty}
+    >
+      {difficulty}
+    </button>
+  ))}
+</div>
+
+<script>
+  const buttons = document.querySelectorAll('[data-difficulty]');
+  const videos = document.querySelectorAll('[data-video-difficulty]');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Update active button
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-indigo-600', 'text-white');
+        btn.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+      });
+      button.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+      button.classList.add('bg-indigo-600', 'text-white');
+
+      // Filter videos
+      const selectedDifficulty = button.getAttribute('data-difficulty');
+      videos.forEach(video => {
+        const videoDifficulty = video.getAttribute('data-video-difficulty');
+        if (selectedDifficulty === 'All' || selectedDifficulty === videoDifficulty) {
+          video.classList.remove('hidden');
+        } else {
+          video.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
