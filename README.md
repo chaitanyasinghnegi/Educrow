@@ -1,6 +1,6 @@
 # EduCrow
 
-An interactive coding learning platform built with Astro, React, and Tailwind CSS. EduCrow provides a structured environment for learning programming through hands-on coding challenges, AI-assisted guidance, curated video tutorials, and quick-reference cheatsheets.
+An interactive coding learning platform built with Astro, React, and Tailwind CSS. EduCrow provides a structured environment for learning programming through hands-on coding challenges, AI-assisted guidance, curated video tutorials, and quick-reference cheatsheets also.
 
 ---
 
