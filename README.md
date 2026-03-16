@@ -119,3 +119,4 @@ npm run build
 - [ ] Mobile navigation menu (hamburger/drawer)
 - [ ] User progress tracking (problems solved, videos watched, streaks)
 - [ ] Community / discussion forum per problem
+- [ ] Offline off-loading of courses
