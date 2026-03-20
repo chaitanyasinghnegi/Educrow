@@ -15,7 +15,7 @@ const { language } = Astro.props;
 const languageCheatsheets = cheatsheets.filter(sheet => sheet.languageId === language.id);
 ---
 
-<MainLayout title={`${language.name} Cheatsheets`}>
+<MainLayout title={`${language.name} Cheatsheets`} requireAuth={true}>
   <div class="max-w-6xl mx-auto px-4">
     <div class="flex items-center gap-4 mb-8">
       <a href="/cheatsheets" class="text-indigo-600 hover:text-indigo-800 flex items-center gap-2">

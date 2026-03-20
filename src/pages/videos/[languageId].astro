@@ -16,7 +16,7 @@ const { language } = Astro.props;
 const videos = videoTutorials.filter(video => video.languageId === language.id);
 ---
 
-<MainLayout title={`${language.name} Tutorials`}>
+<MainLayout title={`${language.name} Tutorials`} requireAuth={true}>
   <div class="max-w-6xl mx-auto px-4">
     <div class="flex items-center gap-4 mb-8">
       <a href="/videos" class="text-indigo-600 hover:text-indigo-800 flex items-center gap-2">

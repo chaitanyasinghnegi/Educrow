@@ -2,7 +2,7 @@
 import MainLayout from '../layouts/MainLayout.astro';
 ---
 
-<MainLayout title="Sign Up">
+<MainLayout title="Sign Up" showNav={false}>
   <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
       <div>
@@ -116,8 +116,8 @@ import MainLayout from '../layouts/MainLayout.astro';
   import { createClient } from '@supabase/supabase-js';
 
   const supabase = createClient(
-    'https://icmcvvpwysiswhnatifi.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImljbWN2dnB3eXNpc3dobmF0aWZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4NDQyNDEsImV4cCI6MjA4NzQyMDI0MX0.4yUbzoSGPP0PAgSUaXehVcaDEnJ8Ev-pl1j1L5HmMD8'
+    import.meta.env.PUBLIC_SUPABASE_URL,
+    import.meta.env.PUBLIC_SUPABASE_ANON_KEY
   );
 
   // DOM elements

@@ -4,9 +4,11 @@ import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
+  showNav?: boolean;
+  requireAuth?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, showNav = true, requireAuth = false } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -14,14 +16,27 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title} - CodeLearning Platform</title>
+    <title>{title} - EduCrow</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body class="min-h-screen bg-gray-50">
-    <Navigation />
-    <main class="container mx-auto px-4 py-8">
+    {showNav && <Navigation />}
+    <main class={showNav ? "container mx-auto px-4 py-8" : ""}>
       <slot />
     </main>
-    <Footer />
+    {showNav && <Footer />}
+
+    {requireAuth && (
+      <script>
+        // Auth guard: redirect to signin if no session exists
+        (function() {
+          const session = sessionStorage.getItem('userSession');
+          const publicPaths = ['/', '/signin', '/signup'];
+          if (!session && !publicPaths.includes(window.location.pathname)) {
+            window.location.href = '/signin';
+          }
+        })();
+      </script>
+    )}
   </body>
 </html>

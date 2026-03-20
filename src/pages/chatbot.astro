@@ -2,7 +2,7 @@
 import MainLayout from '../layouts/MainLayout.astro';
 ---
 
-<MainLayout title="AI Chatbot">
+<MainLayout title="AI Chatbot" requireAuth={true}>
   <div class="min-h-screen flex flex-col">
     <div class="flex-1 max-w-3xl mx-auto w-full p-4">
       <h1 class="text-3xl font-bold mb-8">AI Coding Assistant</h1>
@@ -34,7 +34,7 @@ import MainLayout from '../layouts/MainLayout.astro';
 </MainLayout>
 
 <script>
-  const GROQ_API_KEY = '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';
+  const GROQ_API_KEY = import.meta.env.PUBLIC_GROQ_API_KEY;
   const API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
   const chatMessages = document.getElementById('chat-messages');
