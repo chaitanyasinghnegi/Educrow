@@ -1,17 +1,33 @@
 export const LANGUAGE_VERSIONS = {
-  python: "3.10.0",
-  java: "15.0.2", 
-  c: "10.2.0",
-  csharp: "6.12.0",
+  python: "3.12.5",
+  java: "17.0.6", 
+  c: "14.1.0",
+  csharp: "6.6.0.161",
   javascript: "18.15.0",
   typescript: "5.0.3",
-  php: "8.2.3",
-  ruby: "3.2.1",
-  rust: "1.68.2",
-  go: "1.19.2",
-  kotlin: "1.8.20",
-  swift: "5.8",
-  scala: "3.2.2",
+  php: "8.3.11",
+  ruby: "2.7.0",
+  rust: "1.85.0",
+  go: "1.23.5",
+  kotlin: "2.1.10",
+  swift: "5.2.3",
+  scala: "3.4.2",
+};
+
+export const JUDGE0_LANGUAGE_IDS = {
+  python: 100, // 3.12.5
+  java: 91,    // JDK 17.0.6
+  c: 103,      // GCC 14.1.0
+  csharp: 51,  // Mono 6.6.0.161
+  javascript: 93, // Node.js 18.15.0
+  typescript: 94, // TypeScript 5.0.3
+  php: 98,     // PHP 8.3.11
+  ruby: 72,    // Ruby 2.7.0
+  rust: 108,   // Rust 1.85.0
+  go: 107,     // Go 1.23.5
+  kotlin: 111, // Kotlin 2.1.10
+  swift: 83,   // Swift 5.2.3
+  scala: 112,  // Scala 3.4.2
 };
 
 export const CODE_SNIPPETS = {

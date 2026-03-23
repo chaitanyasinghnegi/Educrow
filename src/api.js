@@ -1,19 +1,33 @@
 import axios from "axios";
-import { LANGUAGE_VERSIONS } from "./constants";
+import { JUDGE0_LANGUAGE_IDS } from "./constants";
 
 const API = axios.create({
-  baseURL: "https://emkc.org/api/v2/piston",
+  baseURL: "https://ce.judge0.com",
 });
 
 export const executeCode = async (language, sourceCode) => {
-  const response = await API.post("/execute", {
-    language: language,
-    version: LANGUAGE_VERSIONS[language],
-    files: [
-      {
-        content: sourceCode,
-      },
-    ],
+  const languageId = JUDGE0_LANGUAGE_IDS[language];
+  
+  if (!languageId) {
+    throw new Error(`Language '${language}' is not supported yet.`);
+  }
+
+  const response = await API.post("/submissions?base64_encoded=false&wait=true", {
+    language_id: languageId,
+    source_code: sourceCode,
   });
-  return response.data;
+  
+  const data = response.data;
+  
+  // Map Judge0's response format to what Output.jsx expects (Piston's format)
+  const output = [data.compile_output, data.stdout, data.stderr]
+    .filter(Boolean)
+    .join("\n");
+    
+  return {
+    run: {
+      output: output,
+      stderr: data.stderr || data.compile_output ? data.stderr || data.compile_output : "",
+    }
+  };
 };
