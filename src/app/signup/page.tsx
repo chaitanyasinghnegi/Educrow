@@ -2,13 +2,8 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabaseClient';
 import StepTracker from '@/components/progress/StepTracker';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
 
 export default function SignUpPage() {
   const [error, setError] = useState('');
@@ -16,7 +11,7 @@ export default function SignUpPage() {
   const [otpVisible, setOtpVisible] = useState(false);
   const [otpError, setOtpError] = useState('');
   const [verifyLoading, setVerifyLoading] = useState(false);
-  const [otpValues, setOtpValues] = useState<string[]>(Array(8).fill(''));
+  const [otpValues, setOtpValues] = useState<string[]>(Array(6).fill(''));
   const [resendDisabled, setResendDisabled] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const pendingEmail = useRef('');
@@ -79,7 +74,7 @@ export default function SignUpPage() {
     const next = [...otpValues];
     next[index] = digit;
     setOtpValues(next);
-    if (digit && index < 7) inputRefs.current[index + 1]?.focus();
+    if (digit && index < 5) inputRefs.current[index + 1]?.focus();
   };
 
   const handleOtpKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -92,17 +87,17 @@ export default function SignUpPage() {
     e.preventDefault();
     const pasted = e.clipboardData.getData('text').replace(/[^0-9]/g, '');
     const next = [...otpValues];
-    for (let i = 0; i < Math.min(pasted.length, 8 - index); i++) {
+    for (let i = 0; i < Math.min(pasted.length, 6 - index); i++) {
       next[index + i] = pasted[i];
     }
     setOtpValues(next);
-    const nextFocus = Math.min(index + pasted.length, 7);
+    const nextFocus = Math.min(index + pasted.length, 5);
     inputRefs.current[nextFocus]?.focus();
   };
 
   const handleVerify = async () => {
     const token = getOtpCode();
-    if (token.length !== 8) return;
+    if (token.length !== 6) return;
     setOtpError('');
     setVerifyLoading(true);
 
@@ -126,7 +121,7 @@ export default function SignUpPage() {
       }
     } catch (err: unknown) {
       setOtpError((err as Error).message || 'Invalid verification code. Please try again.');
-      setOtpValues(Array(8).fill(''));
+      setOtpValues(Array(6).fill(''));
       inputRefs.current[0]?.focus();
     } finally {
       setVerifyLoading(false);
@@ -144,7 +139,7 @@ export default function SignUpPage() {
     }
   };
 
-  const otpComplete = getOtpCode().length === 8;
+  const otpComplete = getOtpCode().length === 6;
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
@@ -258,7 +253,7 @@ export default function SignUpPage() {
               </div>
               <h3 className="text-2xl font-semibold text-text-primary mb-2">Check your email</h3>
               <p className="text-sm text-text-secondary leading-relaxed">
-                We&apos;ve sent an 8-digit verification code to
+                We&apos;ve sent a 6-digit verification code to
                 <br />
                 <span className="font-medium text-text-primary">{pendingEmail.current}</span>
               </p>

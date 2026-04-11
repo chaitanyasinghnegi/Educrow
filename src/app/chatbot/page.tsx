@@ -4,9 +4,6 @@ import { useState, useRef, useEffect } from 'react';
 import AuthGuard from '@/components/AuthGuard';
 import AppLayout from '@/components/AppLayout';
 
-const GROQ_API_KEY = process.env.NEXT_PUBLIC_GROQ_API_KEY;
-const API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-
 interface Message {
   role: 'user' | 'assistant' | 'system';
   content: string;
@@ -46,23 +43,19 @@ export default function ChatbotPage() {
     conversationHistory.current.push({ role: 'user', content: message });
 
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${GROQ_API_KEY}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'llama3-70b-8192',
           messages: conversationHistory.current,
-          temperature: 0.7,
-          max_tokens: 4096,
         }),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error?.message || 'API request failed');
+        throw new Error(errorData.error || 'API request failed');
       }
 
       const data = await response.json();
