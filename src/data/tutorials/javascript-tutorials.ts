@@ -6,7 +6,7 @@ export const javascriptTutorials = [
     description: 'Learn the basics of JavaScript including variables, functions, and control flow',
     thumbnail: 'https://placehold.co/600x400/2563eb/ffffff?text=JavaScript+Basics',
     duration: '15:30',
-    difficulty: 'Beginner',
+    difficulty: 'Beginner' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=W6NZfCO5SIk'
   },
   {
@@ -16,7 +16,7 @@ export const javascriptTutorials = [
     description: 'Master promises, async/await, and handling asynchronous operations',
     thumbnail: 'https://placehold.co/600x400/2563eb/ffffff?text=Async+JavaScript',
     duration: '20:45',
-    difficulty: 'Intermediate',
+    difficulty: 'Intermediate' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=PoRJizFvM7s'
   },
   {
@@ -26,7 +26,7 @@ export const javascriptTutorials = [
     description: 'Learn how to interact with the Document Object Model',
     thumbnail: 'https://placehold.co/600x400/2563eb/ffffff?text=DOM+Manipulation',
     duration: '18:20',
-    difficulty: 'Beginner',
+    difficulty: 'Beginner' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=wiozYyXQEVk'
   },
   {
@@ -36,7 +36,7 @@ export const javascriptTutorials = [
     description: 'Modern JavaScript features and syntax improvements',
     thumbnail: 'https://placehold.co/600x400/2563eb/ffffff?text=ES6+Features',
     duration: '25:15',
-    difficulty: 'Intermediate',
+    difficulty: 'Intermediate' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=NCwa_xi0Uuc'
   },
   {
@@ -46,7 +46,7 @@ export const javascriptTutorials = [
     description: 'Classes, inheritance, and OOP patterns in JavaScript',
     thumbnail: 'https://placehold.co/600x400/2563eb/ffffff?text=OOP+JavaScript',
     duration: '30:00',
-    difficulty: 'Advanced',
+    difficulty: 'Advanced' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=PFmuCDHHpwk'
   },
   {
@@ -56,7 +56,7 @@ export const javascriptTutorials = [
     description: 'Functional programming concepts and techniques',
     thumbnail: 'https://placehold.co/600x400/2563eb/ffffff?text=Functional+Programming',
     duration: '28:45',
-    difficulty: 'Advanced',
+    difficulty: 'Advanced' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=e-5obm1G_FY'
   },
   {
@@ -66,7 +66,7 @@ export const javascriptTutorials = [
     description: 'Unit testing with Jest and testing best practices',
     thumbnail: 'https://placehold.co/600x400/2563eb/ffffff?text=Testing',
     duration: '22:30',
-    difficulty: 'Intermediate',
+    difficulty: 'Intermediate' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=7r4xVDI2vho'
   },
   {
@@ -76,7 +76,7 @@ export const javascriptTutorials = [
     description: 'Common design patterns in JavaScript applications',
     thumbnail: 'https://placehold.co/600x400/2563eb/ffffff?text=Design+Patterns',
     duration: '35:15',
-    difficulty: 'Advanced',
+    difficulty: 'Advanced' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=tM-NFhE7X0E'
   },
   {
@@ -86,7 +86,7 @@ export const javascriptTutorials = [
     description: 'Techniques for optimizing JavaScript code',
     thumbnail: 'https://placehold.co/600x400/2563eb/ffffff?text=Performance',
     duration: '27:40',
-    difficulty: 'Advanced',
+    difficulty: 'Advanced' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=UHI0J1Nw9EY'
   },
   {
@@ -96,7 +96,7 @@ export const javascriptTutorials = [
     description: 'Webpack, Babel, and modern development tools',
     thumbnail: 'https://placehold.co/600x400/2563eb/ffffff?text=Tooling',
     duration: '24:55',
-    difficulty: 'Intermediate',
+    difficulty: 'Intermediate' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=5IG4UmULyoA'
   }
 ];

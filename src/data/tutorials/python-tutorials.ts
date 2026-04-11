@@ -6,7 +6,7 @@ export const pythonTutorials = [
     description: 'Introduction to Python syntax and basic concepts',
     thumbnail: 'https://placehold.co/600x400/059669/ffffff?text=Python+Basics',
     duration: '16:45',
-    difficulty: 'Beginner',
+    difficulty: 'Beginner' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=rfscVS0vtbw'
   },
   {
@@ -16,7 +16,7 @@ export const pythonTutorials = [
     description: 'Lists, dictionaries, sets, and tuples explained',
     thumbnail: 'https://placehold.co/600x400/059669/ffffff?text=Data+Structures',
     duration: '23:30',
-    difficulty: 'Beginner',
+    difficulty: 'Beginner' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=R-HLU9Fl5ug'
   },
   {
@@ -26,7 +26,7 @@ export const pythonTutorials = [
     description: 'Classes, inheritance, and OOP concepts',
     thumbnail: 'https://placehold.co/600x400/059669/ffffff?text=OOP',
     duration: '28:15',
-    difficulty: 'Intermediate',
+    difficulty: 'Intermediate' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=Ej_02ICOIgs'
   },
   {
@@ -36,7 +36,7 @@ export const pythonTutorials = [
     description: 'Working with files and directories in Python',
     thumbnail: 'https://placehold.co/600x400/059669/ffffff?text=File+Handling',
     duration: '19:20',
-    difficulty: 'Beginner',
+    difficulty: 'Beginner' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=Uh2ebFW8OYM'
   },
   {
@@ -46,7 +46,7 @@ export const pythonTutorials = [
     description: 'Error handling and exceptions in Python',
     thumbnail: 'https://placehold.co/600x400/059669/ffffff?text=Exceptions',
     duration: '21:10',
-    difficulty: 'Intermediate',
+    difficulty: 'Intermediate' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=NIWwJbo-9_8'
   },
   {
@@ -56,7 +56,7 @@ export const pythonTutorials = [
     description: 'Understanding and creating decorators',
     thumbnail: 'https://placehold.co/600x400/059669/ffffff?text=Decorators',
     duration: '25:45',
-    difficulty: 'Advanced',
+    difficulty: 'Advanced' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=9oyr0mocZTg'
   },
   {
@@ -66,7 +66,7 @@ export const pythonTutorials = [
     description: 'Working with generators and iterators',
     thumbnail: 'https://placehold.co/600x400/059669/ffffff?text=Generators',
     duration: '24:30',
-    difficulty: 'Advanced',
+    difficulty: 'Advanced' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=bD05uGo_sVI'
   },
   {
@@ -76,7 +76,7 @@ export const pythonTutorials = [
     description: 'Unit testing with pytest and testing practices',
     thumbnail: 'https://placehold.co/600x400/059669/ffffff?text=Testing',
     duration: '26:15',
-    difficulty: 'Intermediate',
+    difficulty: 'Intermediate' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=GEjA7P6s7ac'
   },
   {
@@ -86,7 +86,7 @@ export const pythonTutorials = [
     description: 'Asynchronous programming with asyncio',
     thumbnail: 'https://placehold.co/600x400/059669/ffffff?text=Async',
     duration: '32:20',
-    difficulty: 'Advanced',
+    difficulty: 'Advanced' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=BI0asZuqFXM'
   },
   {
@@ -96,7 +96,7 @@ export const pythonTutorials = [
     description: 'Building web applications using Flask',
     thumbnail: 'https://placehold.co/600x400/059669/ffffff?text=Web+Dev',
     duration: '35:00',
-    difficulty: 'Intermediate',
+    difficulty: 'Intermediate' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=dam0GPOAvVI'
   }
 ];

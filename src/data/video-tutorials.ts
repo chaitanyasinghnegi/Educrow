@@ -11,7 +11,7 @@ export interface VideoTutorial {
   thumbnail: string;
   duration: string;
   difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
-  youtubeUrl: string; // Added URL property
+  youtubeUrl: string;
 }
 
 export const videoTutorials: VideoTutorial[] = [
@@ -20,4 +20,3 @@ export const videoTutorials: VideoTutorial[] = [
   ...javaTutorials,
   ...cppTutorials
 ];
-

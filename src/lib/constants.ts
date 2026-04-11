@@ -1,0 +1,31 @@
+export const LANGUAGE_VERSIONS: Record<string, string> = {
+  python: '3.10.0',
+  java: '15.0.2',
+  c: '10.2.0',
+  csharp: '6.12.0',
+  javascript: '18.15.0',
+  typescript: '5.0.3',
+  php: '8.2.3',
+  ruby: '3.2.1',
+  rust: '1.68.2',
+  go: '1.19.2',
+  kotlin: '1.8.20',
+  swift: '5.8',
+  scala: '3.2.2',
+};
+
+export const CODE_SNIPPETS: Record<string, string> = {
+  python: `# Write your code here\n`,
+  java: `public class Main {\n\tpublic static void main(String[] args) {\n\t\t// Write your code here\n\t}\n}\n`,
+  c: `#include <stdio.h>\n\nint main() {\n\t// Write your code here\n\treturn 0;\n}\n`,
+  csharp: `using System;\n\nnamespace Solution\n{\n\tclass Program {\n\t\tstatic void Main(string[] args) {\n\t\t\t// Write your code here\n\t\t}\n\t}\n}\n`,
+  javascript: `// Write your code here\n`,
+  typescript: `// Write your code here\n`,
+  php: `<?php\n\n// Write your code here\n`,
+  ruby: `# Write your code here\n`,
+  rust: `fn main() {\n\t// Write your code here\n}\n`,
+  go: `package main\n\nfunc main() {\n\t// Write your code here\n}\n`,
+  kotlin: `fun main() {\n\t// Write your code here\n}\n`,
+  swift: `// Write your code here\n`,
+  scala: `object Main extends App {\n\t// Write your code here\n}\n`,
+};

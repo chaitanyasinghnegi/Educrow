@@ -6,7 +6,7 @@ export const cppTutorials = [
     description: 'Basic syntax and core concepts of C++',
     thumbnail: 'https://placehold.co/600x400/7c3aed/ffffff?text=C%2B%2B+Basics',
     duration: '19:15',
-    difficulty: 'Beginner',
+    difficulty: 'Beginner' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=vLnPwxZdW4Y'
   },
   {
@@ -16,7 +16,7 @@ export const cppTutorials = [
     description: 'Classes, inheritance, and polymorphism',
     thumbnail: 'https://placehold.co/600x400/7c3aed/ffffff?text=OOP',
     duration: '28:30',
-    difficulty: 'Intermediate',
+    difficulty: 'Intermediate' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=q_6lXNh1cJ8'
   },
   {
@@ -26,7 +26,7 @@ export const cppTutorials = [
     description: 'Pointers, references, and dynamic memory',
     thumbnail: 'https://placehold.co/600x400/7c3aed/ffffff?text=Memory',
     duration: '31:45',
-    difficulty: 'Advanced',
+    difficulty: 'Advanced' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=U3aXWizDbQ4'
   },
   {
@@ -36,7 +36,7 @@ export const cppTutorials = [
     description: 'Standard Template Library containers and algorithms',
     thumbnail: 'https://placehold.co/600x400/7c3aed/ffffff?text=STL',
     duration: '26:20',
-    difficulty: 'Intermediate',
+    difficulty: 'Intermediate' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=zH_omFPqMO4'
   }
 ];

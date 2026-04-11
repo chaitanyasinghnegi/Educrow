@@ -6,7 +6,7 @@ export const javaTutorials = [
     description: 'Core Java concepts and syntax',
     thumbnail: 'https://placehold.co/600x400/dc2626/ffffff?text=Java+Basics',
     duration: '18:30',
-    difficulty: 'Beginner',
+    difficulty: 'Beginner' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=eIrMbAQSU34'
   },
   {
@@ -16,7 +16,7 @@ export const javaTutorials = [
     description: 'Classes, inheritance, and polymorphism',
     thumbnail: 'https://placehold.co/600x400/dc2626/ffffff?text=OOP',
     duration: '27:45',
-    difficulty: 'Intermediate',
+    difficulty: 'Intermediate' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=rlQuY0PnfZc'
   },
   {
@@ -26,7 +26,7 @@ export const javaTutorials = [
     description: 'Lists, Sets, Maps, and collection utilities',
     thumbnail: 'https://placehold.co/600x400/dc2626/ffffff?text=Collections',
     duration: '25:15',
-    difficulty: 'Intermediate',
+    difficulty: 'Intermediate' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=kjZ2tLQQF0s'
   },
   {
@@ -36,7 +36,7 @@ export const javaTutorials = [
     description: 'Managing errors and exceptions in Java',
     thumbnail: 'https://placehold.co/600x400/dc2626/ffffff?text=Exceptions',
     duration: '20:30',
-    difficulty: 'Beginner',
+    difficulty: 'Beginner' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=I6h5oG7F8TI'
   },
   {
@@ -46,7 +46,7 @@ export const javaTutorials = [
     description: 'Concurrent programming in Java',
     thumbnail: 'https://placehold.co/600x400/dc2626/ffffff?text=Threads',
     duration: '32:15',
-    difficulty: 'Advanced',
+    difficulty: 'Advanced' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=xtI2QaT6_YE'
   },
   {
@@ -56,7 +56,7 @@ export const javaTutorials = [
     description: 'Working with files and streams',
     thumbnail: 'https://placehold.co/600x400/dc2626/ffffff?text=IO',
     duration: '23:40',
-    difficulty: 'Intermediate',
+    difficulty: 'Intermediate' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=MOsxgj3NUQs'
   },
   {
@@ -66,7 +66,7 @@ export const javaTutorials = [
     description: 'Type-safe generic programming',
     thumbnail: 'https://placehold.co/600x400/dc2626/ffffff?text=Generics',
     duration: '28:55',
-    difficulty: 'Advanced',
+    difficulty: 'Advanced' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=K1iu1kXkVoA'
   },
   {
@@ -76,7 +76,7 @@ export const javaTutorials = [
     description: 'Introduction to Spring Framework',
     thumbnail: 'https://placehold.co/600x400/dc2626/ffffff?text=Spring',
     duration: '35:20',
-    difficulty: 'Advanced',
+    difficulty: 'Advanced' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=lt90UbdE3nw'
   },
   {
@@ -86,7 +86,7 @@ export const javaTutorials = [
     description: 'Testing with JUnit and Mockito',
     thumbnail: 'https://placehold.co/600x400/dc2626/ffffff?text=Testing',
     duration: '26:45',
-    difficulty: 'Intermediate',
+    difficulty: 'Intermediate' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=qJ2Y9j6XLpM'
   },
   {
@@ -96,8 +96,7 @@ export const javaTutorials = [
     description: 'Functional programming features in Java',
     thumbnail: 'https://placehold.co/600x400/dc2626/ffffff?text=Lambda',
     duration: '24:30',
-    difficulty: 'Intermediate',
+    difficulty: 'Intermediate' as const,
     youtubeUrl: 'https://www.youtube.com/watch?v=-iU7eB22VaI'
   }
 ];
-
