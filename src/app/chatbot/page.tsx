@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import AuthGuard from '@/components/AuthGuard';
 import AppLayout from '@/components/AppLayout';
+import { marked } from 'marked';
 
 interface Message {
   role: 'user' | 'assistant' | 'system';
@@ -22,7 +23,14 @@ export default function ChatbotPage() {
     {
       role: 'system',
       content:
-        'You are a helpful AI coding assistant. Provide clear, concise answers to programming questions. Do no use emojis, markdown format so no special symbols for heading or code or anything like that. Your only job is to provide with solutions and no extra information and no code, only answer the question in meaning, if the user asking for code, do not provide and do not provide code, only answer the question in meaning and explain to them how you are just there for helping them and not for code pasting',
+        `You are EduCrow AI, an elite, highly helpful AI coding assistant.
+Your goal is to provide precise, clean, and best-practice solutions to programming problems.
+Capabilities & Rules:
+1. Token efficiency is critical. Provide direct, succinct answers without unnecessary filler.
+2. Only write extensive code or lengthy explanations when explicitly required by complex coding requests.
+3. Always use markdown formatting for readability, including properly fenced code blocks.
+4. Keep explanations focused strictly on the solution. Do not blabber.
+5. If fixing a bug, briefly explain the "why" and provide the corrected code snippet.`,
     },
   ]);
 
@@ -77,7 +85,7 @@ export default function ChatbotPage() {
     <div className="space-y-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
       <div className="bg-surface-1/50 backdrop-blur-sm border border-border rounded-2xl p-5 shadow-sm">
         <h3 className="text-sm font-semibold tracking-wider text-text-primary uppercase mb-4">Chat Context</h3>
-        <p className="text-sm text-text-secondary mb-3">Model: <span className="font-medium text-text-primary">Llama 3</span></p>
+        <p className="text-sm text-text-secondary mb-3">Model: <span className="font-medium text-text-primary">Llama 3.3 (70B)</span></p>
         <p className="text-sm text-text-secondary mb-3">Provider: <span className="font-medium text-text-primary">Groq</span></p>
         <p className="text-sm text-text-secondary">Messages: <span className="font-medium text-text-primary">{messages.length}</span></p>
       </div>
@@ -100,13 +108,13 @@ export default function ChatbotPage() {
     <>
       <AuthGuard />
       <AppLayout rightPanel={<ChatbotRightPanel />} hideFooter>
-        <div className="w-full flex-1 flex flex-col h-[calc(100vh-6rem)]">
+        <div className="w-full flex-1 min-h-0 flex flex-col">
           <div className="mb-4 animate-fade-in pl-2 shrink-0">
             <h1 className="text-3xl font-semibold text-text-primary tracking-tight mb-2">AI Coding Assistant</h1>
             <p className="text-text-secondary text-sm">Ask questions, get explanations, and debug your code with our LLM.</p>
           </div>
           
-          <div className="flex-1 bg-surface-1/50 backdrop-blur-xl border border-border rounded-2xl p-4 md:p-6 flex flex-col shadow-[0_8px_30px_rgba(0,0,0,0.4)] animate-fade-up min-h-[400px]">
+          <div className="flex-1 min-h-0 bg-surface-1/50 backdrop-blur-xl border border-border rounded-2xl p-4 md:p-6 flex flex-col shadow-[0_8px_30px_rgba(0,0,0,0.4)] animate-fade-up">
             <div
               ref={chatRef}
               className="flex-1 overflow-y-auto space-y-6 pr-2 mb-6 custom-scrollbar"
@@ -117,9 +125,16 @@ export default function ChatbotPage() {
                     <p className={`text-xs font-medium mb-1 opacity-70 ${msg.isUser ? '' : 'text-brand-light'}`}>
                       {msg.isUser ? 'You' : 'EduCrow AI'}
                     </p>
-                    <div className="leading-relaxed whitespace-pre-wrap text-sm md:text-base">
-                      {msg.text}
-                    </div>
+                    {msg.isUser ? (
+                      <div className="leading-relaxed whitespace-pre-wrap text-sm md:text-base">
+                        {msg.text}
+                      </div>
+                    ) : (
+                      <div 
+                        className="prose prose-invert prose-sm md:prose-base max-w-none leading-relaxed"
+                        dangerouslySetInnerHTML={{ __html: marked.parse(msg.text) as string }}
+                      />
+                    )}
                   </div>
                 </div>
               ))}

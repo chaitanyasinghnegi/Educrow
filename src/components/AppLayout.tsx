@@ -12,17 +12,17 @@ interface AppLayoutProps {
 
 export default function AppLayout({ children, rightPanel, hideFooter = false }: AppLayoutProps) {
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden bg-background">
+    <div className={`${hideFooter ? 'h-screen fixed inset-0' : 'min-h-screen relative'} flex flex-col overflow-hidden bg-background`}>
       <Navigation />
       
       {/* Ambient background */}
       <div className="fixed top-0 right-[-10%] h-[800px] w-[800px] bg-brand-muted/10 blur-[150px] rounded-full pointer-events-none -translate-y-1/3" />
       <div className="fixed inset-0 bg-[url('/noise.svg')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
 
-      <main className="flex-1 w-full max-w-[1600px] mx-auto px-4 md:px-6 relative z-10 flex pt-6 pb-12 gap-8">
+      <main className="flex-1 min-h-0 w-full max-w-[1600px] mx-auto px-4 md:px-6 relative z-10 flex pt-6 pb-12 gap-8">
         
         {/* Main Content Area */}
-        <div className="flex-1 w-full min-w-0 flex flex-col">
+        <div className="flex-1 min-h-0 w-full min-w-0 flex flex-col">
           {children}
         </div>
 
