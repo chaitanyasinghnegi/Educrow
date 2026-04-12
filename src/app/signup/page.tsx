@@ -6,6 +6,7 @@ import { supabase } from '@/lib/supabaseClient';
 import StepTracker from '@/components/progress/StepTracker';
 
 export default function SignUpPage() {
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [error, setError] = useState('');
   const [signupLoading, setSignupLoading] = useState(false);
   const [otpVisible, setOtpVisible] = useState(false);
@@ -45,7 +46,7 @@ export default function SignUpPage() {
     const password = formData.get('password') as string;
     const first_name = formData.get('first_name') as string;
     const last_name = formData.get('last_name') as string;
-    const phone_number = formData.get('phone_number') as string;
+    const phone_number = (formData.get('phone_number') as string).replace(/\D/g, '');
 
     try {
       const { data, error } = await supabase.auth.signUp({
@@ -65,6 +66,23 @@ export default function SignUpPage() {
     } finally {
       setSignupLoading(false);
     }
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value.replace(/\D/g, '');
+    const trimmed = input.substring(0, 10);
+    
+    let formatted = '';
+    if (trimmed.length > 0) {
+      formatted = trimmed.substring(0, 3);
+      if (trimmed.length > 3) {
+        formatted += '-' + trimmed.substring(3, 7);
+      }
+      if (trimmed.length > 7) {
+        formatted += '-' + trimmed.substring(7, 10);
+      }
+    }
+    setPhoneNumber(formatted);
   };
 
   const getOtpCode = () => otpValues.join('');
@@ -207,8 +225,10 @@ export default function SignUpPage() {
                     name={field.id}
                     type={field.type}
                     required
+                    value={field.id === 'phone_number' ? phoneNumber : undefined}
+                    onChange={field.id === 'phone_number' ? handlePhoneChange : undefined}
                     className="appearance-none block w-full px-4 py-3 bg-surface-2 border border-border placeholder-text-tertiary text-text-primary rounded-xl focus:outline-none focus:ring-1 focus:ring-border-strong focus:border-border-strong sm:text-sm transition-all shadow-sm"
-                    placeholder={field.placeholder}
+                    placeholder={field.id === 'phone_number' ? '000-0000-000' : field.placeholder}
                   />
                 </div>
               ))}
